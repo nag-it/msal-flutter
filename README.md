@@ -1,46 +1,26 @@
-We are looking for start ups to work with for launching our new productised IAM and user management system which greatly simplifies adding user authentication to your app and includes additional functionality for user management and analytics. To find out more or sign up please visit [https://www.joopie.co](https://www.joopie.co "Joopie") and let us know you came from this repo.
+# Forked MSAL Wrapper Library for Flutter
 
-## IMPORTANT ANNOUNCEMENT
-This package comes as is. Unfortunately we do not have the resources to offer free support, help, or review any PRs. Please feel free to fork or use this package in anyway you like. For paid support options please email us at info@muljin.com.
+Forked and modified project from [https://pub.dev/packages/msal_flutter](https://pub.dev/packages/msal_flutter). It's not planned to be published on pub.dev. When you want to use it, fork it and add it to your project.
 
-## Version 2.0.0
-Version 2.0.0+ have moved to nullable and a non-nullable version will not be available. Please ensure all packages you use support nullable and you have updated to the latest version of stable flutter.
-
-### Upgrade guide
-To upgrade older projects to V2, make sure to do the following:
-- Update gradle to 3.6.0+
-- Update Kotlin to 1.4.31 or later (Might work, but not tested with lower versions of 1.4.0+ of kotlin)
-- Update the msal_default_config.json file to the latest available in this repo.
-- Update flutter to the latest build.
-
-## VERSION 1.0.0+ WARNING
-Version 1.0.0 uses the updated MSAL Libraries and moves to Android-X. 1.0.0 IS NOT compatiable with older versions. Please only update to 1.0.+ if you are ready to migrate your android app and change how you call the constructor.
-Version 1+ is however required to use MSAL on iOS 13+
-
-It is also not recommended to use the login.microsoftonline.com authority and endpoints, as old appear to be being deprecated and do not seperate saved passwords due to domain being the same for all tenants. 
-The new authority template is `https://<tenant>.b2clogin.com/tfp/<tenant>.onmicrosoft.com/<user-flow>`
-e.g. `https://msalfluttertest.b2clogin.com/tfp/msalfluttertest.onmicrosoft.com/B2C_1_sisu`
-
-For troubleshooting known bugs in the new build, please scroll down to the bottom of the page where all bugs and fixes we find will be noted.
-
-# MSAL Wrapper Library for Flutter
-Please note this product is in very early alpha release and subject to change and bugs.
-
-The Microsoft Authentication Library Flutter Wrapper is a wrapper that uses that MSAL libraries for Android and IOS. Currently only the public client application functionality is supported, using the implicit workflow. 
+The Microsoft Authentication Library Flutter Wrapper is a wrapper that uses that MSAL libraries for Android and IOS. Currently only the public client application functionality is supported, using the implicit workflow.
 If you have a requirement for additional functionality however please let me know.
 
 ## Setup
 
-To use MSAL Flutter in your library, first setup an Azure AD B2C tenant and mobile client if you have not done so already, for which detailed instructions can be found at [https://docs.microsoft.com/en-us/azure/active-directory-b2c/](https://docs.microsoft.com/en-us/azure/active-directory-b2c/) 
+To use MSAL Flutter in your library, first setup an Azure AD B2C tenant and mobile client if you have not done so already, for which detailed instructions can be found at [https://docs.microsoft.com/en-us/azure/active-directory-b2c/](https://docs.microsoft.com/en-us/azure/active-directory-b2c/)
 
 ### Flutter
 
-Import the [Msal Flutter package](https://pub.dev/packages/msal_flutter/) into your flutter application by adding it to the list of dependencies in your pubsec.yaml file.
+Import the Msal Flutter package into your flutter application by forking this repo and adding it to the list of dependencies in your pubsec.yaml file.
 
 ```
 dependencies:
-    msal_flutter: ^1.0.0+2
+  msal_flutter:
+    git:
+      url: https://github.com/Earlybyte/msal-flutter.git
+      ref: 1.0.0
 ```
+
 ### Android (Kotlin)
 
 Please ensure you are using Kotlin version 1.4.31 or later. To set this, goto your app's android folder, open the build.gradle file, and under buildscript:ext.kotlin_version change the version to 1.4.31 or later.
@@ -54,8 +34,8 @@ This section is mostly copied and modified from [the official android MSAL libra
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
-2. In your AndroidManifest.xml file add the following intent filter, replacing the placeholder \<YOUR-CLIENT-ID\> for your azure b2c application's client id where indicated below. 
-The default redirect url is msal\<YOUR-CLIENT-ID\>://auth however this can now be changed for android. If you have changed your redirect url to something else, please set the below activity settings to match your own.
+2. In your AndroidManifest.xml file add the following intent filter, replacing the placeholder \<YOUR-CLIENT-ID\> for your azure b2c application's client id where indicated below.
+   The default redirect url is msal\<YOUR-CLIENT-ID\>://auth however this can now be changed for android. If you have changed your redirect url to something else, please set the below activity settings to match your own.
 
 ```
 <activity
@@ -73,17 +53,17 @@ The default redirect url is msal\<YOUR-CLIENT-ID\>://auth however this can now b
 ```
 
 3. Copy the [msal_default_config](https://raw.githubusercontent.com/muljin/msal-flutter/master/doc/templates/msal_default_config.json) from this repository (or make your own if you know what you're doing) and place it into your flutter apps android/src/main/res/raw folder.
-By default/tradition the redirect URL is msal\<YOUR-CLIENT-ID\>://auth for android, however if you have selected a different redirect url please enter that. Note the redirect URL scheme and host combination MUST BE UNIQUE to your application and if you do change it it must also be changed in the activity intent filter in step 2.
+   By default/tradition the redirect URL is msal\<YOUR-CLIENT-ID\>://auth for android, however if you have selected a different redirect url please enter that. Note the redirect URL scheme and host combination MUST BE UNIQUE to your application and if you do change it it must also be changed in the activity intent filter in step 2.
 
-*WARNING* DO NOT set the application type to single. the MSAL Flutter wrapper is only compatiable with the newer multiple account configuration.
+_WARNING_ DO NOT set the application type to single. the MSAL Flutter wrapper is only compatiable with the newer multiple account configuration.
 
 For an example see the example apps usage [here](https://github.com/moodio/msal-flutter/blob/develop/example/android/app/src/main/res/raw/msal_default_config.json)
 
 4. The minimum SDK version must be atleast 21. If you are starting from a new flutter app with the default 16 version, please change this in your gradle settings which can be found in `android > app > build.gradle` file, and then under the object android:defaultConfig>minSdkVersion
 
 ### iOS (Swift)
-This section is mostly copied and modified from Step 1 from [the official iOS MSAL library github repository](https://github.com/AzureAD/microsoft-authentication-library-for-objc). Visit the repository for more details.
 
+This section is mostly copied and modified from Step 1 from [the official iOS MSAL library github repository](https://github.com/AzureAD/microsoft-authentication-library-for-objc). Visit the repository for more details.
 
 1. Add your URL scheme for callbacks to your Info.plist file, replacing the placeholder for your azure b2c application's client id where indicated below.
 
@@ -118,27 +98,26 @@ This section is mostly copied and modified from Step 1 from [the official iOS MS
 5. Add the following function to your AppDelegate class
 
 ```
-override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {    
+override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 guard let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String else {
     return false
-}  
+}
 return MSALPublicClientApplication.handleMSALResponse(url, sourceApplication: sourceApplication)
 }
 ```
 
 6. Trouble shooting
-It is possible that you may get errors such as with the minimum iOS deployment being too low. MSAL Flutter requires a minimum iOS version of 11.0
-To set this, add `platform :ios, '11.0'` on the first line of your Podfile file which can be found in the root of your ios folder.
+   It is possible that you may get errors such as with the minimum iOS deployment being too low. MSAL Flutter requires a minimum iOS version of 11.0
+   To set this, add `platform :ios, '11.0'` on the first line of your Podfile file which can be found in the root of your ios folder.
 
 When upgrading from older versions of MSAL Flutter, you might also need to delete your Podfile.lock file, which is also in the iOS folder.
 
 ## How To Use
 
 1. In flutter, import the package
-`import 'package:msal_flutter/msal_flutter.dart';`
+   `import 'package:msal_flutter/msal_flutter.dart';`
 
-
-2. Use the static factory method createPublicClientApplication to asyncronously create a new instance of the object, by providing your client id, and optionally the authority to authenticate again. 
+2. Use the static factory method createPublicClientApplication to asyncronously create a new instance of the object, by providing your client id, and optionally the authority to authenticate again.
 
    With default authority:
 
@@ -154,18 +133,17 @@ When upgrading from older versions of MSAL Flutter, you might also need to delet
 
    **DO NOT** include the openid or user_impersonation scopes which are added by default
 
- ```
+```
 try{
-    String token = await pca.acquireToken(["https://msalfluttertest.onmicrosoft.com/msalbackend/user_impersonation"]);
+   String token = await pca.acquireToken(["https://msalfluttertest.onmicrosoft.com/msalbackend/user_impersonation"]);
 } on MsalException {
-    //error handling logic here
+   //error handling logic here
 }
 ```
 
 4. Once a user has logged in atleast once, to retrieve a token silently call the acquireTokenSilent function, passing the scopes you wish to acquire the token for. Note that this function will throw an error on failure and should be surrounded by a try catch block as per the example below
 
    **DO NOT** include the openid or user_impersonation scopes which are added by default
-
 
 ```
 try{
@@ -187,17 +165,16 @@ try{
 
 ### List of exceptions that can be thrown
 
-| Exception | Description |
-| --------- | ----------- |
-| MsalException | Base exception, inhertied by all other exceptions. Used for general or unknwon errors |
-| MsalChangedClientIdException | Attempt to initialize a second client id with a different clientid |
-| MsalInitializationException | Error initializing client. Most likely do to incorrect configuration files |
-| MsalInvalidConfigurationException | Configuration error in setting up Public Client Application, such as invalid clientid or authority|
-| MsalInvalidScopeException | Invalid scope or no scope supplied. Currently only supported in android |
-| MsalNoAccountException | User has not previously logged, has logged out or refresh token has expired and and acquire token silently cannot be performed |
-| MsalUninitializedException | Client method called before client has been initialized |
-| MsalUserCancelledException | Login request cancelled by user. Only currently supported in Android, for iOS a MsalException is thrown instead|
-
+| Exception                         | Description                                                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| MsalException                     | Base exception, inhertied by all other exceptions. Used for general or unknwon errors                                          |
+| MsalChangedClientIdException      | Attempt to initialize a second client id with a different clientid                                                             |
+| MsalInitializationException       | Error initializing client. Most likely do to incorrect configuration files                                                     |
+| MsalInvalidConfigurationException | Configuration error in setting up Public Client Application, such as invalid clientid or authority                             |
+| MsalInvalidScopeException         | Invalid scope or no scope supplied. Currently only supported in android                                                        |
+| MsalNoAccountException            | User has not previously logged, has logged out or refresh token has expired and and acquire token silently cannot be performed |
+| MsalUninitializedException        | Client method called before client has been initialized                                                                        |
+| MsalUserCancelledException        | Login request cancelled by user. Only currently supported in Android, for iOS a MsalException is thrown instead                |
 
 # Trouble Shooting
 
