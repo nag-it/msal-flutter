@@ -17,6 +17,6 @@ A new flutter plugin project.
   s.dependency 'Flutter'
   s.dependency 'MSAL', '~> 1.3.3'
   s.swift_version = '5.0'
-  s.ios.deployment_target = '16.0'
+  s.ios.deployment_target = '14.0'
 end
 
