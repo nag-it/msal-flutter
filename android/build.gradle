@@ -28,6 +28,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'uk.co.moodio.msal_flutter'
     compileSdkVersion 30
 
     sourceSets {
