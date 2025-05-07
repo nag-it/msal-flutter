@@ -2,4 +2,4 @@
 export 'src/public_client_application.dart';
 export 'src/exceptions/msal_exceptions.dart';
 
-const String msalFlutterInternalVersion = '2.0.0';
+const String msalFlutterInternalVersion = '2.1.0';

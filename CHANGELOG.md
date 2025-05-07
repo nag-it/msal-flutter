@@ -1,8 +1,9 @@
 # Changelog
 
-## 2.0.0
+## 2.1.0
 - Update MSAL Android version to `6.0.1` and MSAL iOS version to `2.0.0`
 
+## 2.0.0
 - Update MSAL Android version to `6.0.0` and MSAL iOS version to `1.9.0`
 
 - Update MSAL Android version to `5.10.2` and MSAL iOS version to `1.8.1`
