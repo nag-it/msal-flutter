@@ -2,6 +2,7 @@
 
 ## 2.3.0
 - Update MSAL iOS version to `2.1.0`
+- MSAL Android version is still `6.0.1` (latest version '6.1.0' is not yet available in the repository)
 
 ## 2.2.0
 - Downgraded to MSAL IOS version `1.9.0` due to issues with `2.0.0`
