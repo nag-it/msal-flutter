@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.7.0
+- Update MSAL Android version to `7.0.3`
+
 ## 2.6.0
 - Update MSAL Android version to `7.0.1`
 
