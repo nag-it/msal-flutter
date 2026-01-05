@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.12.0
+- Update MSAL Android version to `8.1.1` and MSAL iOS version to `2.7.0`
+
 ## 2.11.0
 - Update MSAL Android version to `8.1.0`
 
